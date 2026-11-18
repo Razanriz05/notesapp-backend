@@ -1,23 +1,17 @@
 import express from 'express';
 import {
-  createNote,
-  getAllNotes,
-  getNoteById,
-  editNoteById,
-  deleteNoteById
+  createNote, getNotes, getNoteById, editNoteById, deleteNoteById
 } from '../controller/note-controller.js';
-// Tambahkan kurung kurawal pada 'validate'
 import { validate, validateQuery } from '../../../middlewares/validate.js';
-import { notePayloadSchema, noteQuerySchema } from '../../../services/notes/validator/schema.js';
+import { notePayloadSchema, noteQuerySchema, noteUpdatePayloadSchema } from '../../../services/notes/validator/schema.js';
+import authenticateToken from '../../../middlewares/auth.js';
 
 const router = express.Router();
 
-router.post('/notes', validate(notePayloadSchema), createNote);
-router.get('/notes', getAllNotes);
-router.get('/notes/:id', getNoteById);
-// eslint-disable-next-line no-undef
-router.get('/notes', validateQuery(noteQuerySchema), getAllNotes);
-router.put('/notes/:id', validate(notePayloadSchema), editNoteById);
-router.delete('/notes/:id', deleteNoteById);
+router.post('/notes', authenticateToken, validate(notePayloadSchema), createNote);
+router.get('/notes', authenticateToken, validateQuery(noteQuerySchema), getNotes);
+router.get('/notes/:id', authenticateToken, getNoteById);
+router.put('/notes/:id', authenticateToken, validate(noteUpdatePayloadSchema), editNoteById);
+router.delete('/notes/:id', authenticateToken, deleteNoteById);
 
 export default router;

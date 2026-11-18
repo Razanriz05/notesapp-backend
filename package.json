@@ -14,9 +14,11 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "dotenv": "^18.0.10",
     "express": "^5.1.0",
     "joi": "^18.3.2",
+    "jsonwebtoken": "^9.0.3",
     "nanoid": "^5.1.5",
     "node-pg-migrate": "^9.0.0",
     "pg": "^8.23.1"
@@ -27,5 +29,8 @@
     "eslint-config-dicodingacademy": "^0.9.4",
     "globals": "^16.2.0",
     "nodemon": "^3.1.10"
+  },
+  "allowScripts": {
+    "bcrypt@6.0.0": true
   }
 }
